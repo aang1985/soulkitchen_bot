@@ -5,7 +5,6 @@ bot_key = open("telebot.key","r").readline()
 print("token:",bot_key)
 
 bot = telebot.TeleBot(bot_key)
-bot.delete_webhook()
 
 @bot.message_handler(commands=["start"])
 def start(message):
