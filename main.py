@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
 BASKET=[]
-bot_key = open("telebot.key","r").readline()
+bot_key = open("telebot.key","r").readline()[:-1]
 print("token:",bot_key)
 
 bot = telebot.TeleBot(bot_key)
