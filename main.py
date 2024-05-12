@@ -26,7 +26,7 @@ def answerBREAKFEST(message):
     button4 = types.KeyboardButton("Фритата")
     button5 = types.KeyboardButton("КОРЗИНА")
 
-    keyboard.add (button1,button2,button3,button4)
+    keyboard.add (button1,button2,button3,button4,button5)
     bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
 
 @bot.message_handler(func=lambda message: True)
@@ -38,7 +38,7 @@ def answerSTR(message):
     button4 = types.KeyboardButton("Фритата")
     button5 = types.KeyboardButton("КОРЗИНА")
 
-    keyboard.add (button1,button2,button3,button4)
+    keyboard.add (button1,button2,button3,button4,button5)
     bot.send_message(message.chat.id ,"Я могу добавить только то, что есть в меню ",reply_markup=keyboard)
 
 @bot.message_handler(func=lambda message: message.text=="Яичница" or message.text=="Овсянка" or message.text=="Мюсли с молоком" or message.text=="Фритата" )
