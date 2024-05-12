@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
 BASKET=[]
-bot_key = open("telebot.key","r").readline()[:-1]
+bot_key = open("telebot.key","r").readline()
 print("token:",bot_key)
 
 bot = telebot.TeleBot(bot_key)
@@ -29,7 +29,7 @@ def answerBREAKFEST(message):
     keyboard.add (button1,button2,button3,button4)
     bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
 
-@bot.message_handler(func=lambda message: message.text==True)
+@bot.message_handler(func=lambda message: True)
 def answerSTR(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
     button1 = types.KeyboardButton("Яичница")
