@@ -17,6 +17,11 @@ def start(message):
 
     bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! ",reply_markup=keyboard)
 
+@bot.message_handler(commands=['menu'])
+def giveMenu(message):
+    f = open('food.pdf','rb')
+    bot.send_document(message.chat.id, f)
+
 @bot.message_handler(func=lambda message: message.text=="Хочу Завтрак")
 def answerBREAKFEST(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
