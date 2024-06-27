@@ -17,7 +17,13 @@ def start(message):
 
     bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! ",reply_markup=keyboard)
 
-@bot.message_handler(commands=['menu'])
+@bot.message_handler(commands=['deserts'])
+def giveMenu(message):
+    f = open('deserts.pdf','rb')
+    bot.send_document(message.chat.id, f)
+
+
+@bot.message_handler(commands=['food'])
 def giveMenu(message):
     f = open('food.pdf','rb')
     bot.send_document(message.chat.id, f)
