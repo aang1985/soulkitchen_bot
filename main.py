@@ -2,9 +2,9 @@ import telebot
 from telebot import types
 BASKET=[]
 bot_key = open("telebot.key","r").readline()
-print("bot_token:",bot_key)
+print("token:",bot_key)
 
-bot = telebot.TeleBot(bot_key)
+bot = telebot.TeleBot(bot_key[:-1])
 
 @bot.message_handler(commands=["start"])
 def start(message):
