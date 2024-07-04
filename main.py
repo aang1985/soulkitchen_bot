@@ -6,6 +6,8 @@ print("token:",bot_key)
 
 bot = telebot.TeleBot(bot_key)
 
+# ChannelID 1002223170132
+
 @bot.message_handler(commands=["start"])
 def start(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
@@ -61,16 +63,63 @@ def answerBREAKFESTIN(message):
 
 @bot.message_handler(func=lambda message: message.text=="КОРЗИНА")
 def answerBASKETBREAKFEST(message):
-    keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    button1 = types.KeyboardButton("Яичница")
-    button2 = types.KeyboardButton("Овсянка") 
-    button3 = types.KeyboardButton("Мюсли с молоком") 
-    button4 = types.KeyboardButton("Фритата")
-    button5 = types.KeyboardButton("КОРЗИНА")
-    button6 = types.KeyboardButton("НАЗАД")
+    # keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    # button1 = types.KeyboardButton("Яичница")
+    # button2 = types.KeyboardButton("Овсянка") 
+    # button3 = types.KeyboardButton("Мюсли с молоком") 
+    # button4 = types.KeyboardButton("Фритата")
+    # button5 = types.KeyboardButton("КОРЗИНА")
+    # button6 = types.KeyboardButton("НАЗАД")
 
-    keyboard.add (button1,button2,button3,button4,button5,button6)
-    bot.send_message(message.chat.id , f"{BASKET}",reply_markup=keyboard) 
+    # keyboard.add (button1,button2,button3,button4,button5,button6)
+
+    keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    button1 = types.KeyboardButton("ЗАКАЗАТЬ")
+    button2 = types.KeyboardButton("НАЗАД") 
+    keyboard.add (button1,button2)
+
+
+    BASKET = ['Яичница','Яичница','Яичница', 'Овсянка', "Мюсли с молоком"]
+
+    SORTED_BASKET = {}
+
+    answer = "Позиции в вашей корзине: \n"
+
+    for item in BASKET:
+        if item in SORTED_BASKET:
+            SORTED_BASKET[item] += 1
+        else:
+            SORTED_BASKET[item] = 1
+    print(SORTED_BASKET)
+    print(list(SORTED_BASKET.items()))
+
+    for (key,value) in list(SORTED_BASKET.items()):
+
+        answer += f" - {key} x {value} \n"
+
+    bot.send_message(message.chat.id , answer, reply_markup=keyboard) 
+
+@bot.message_handler(func=lambda message: message.text=="ЗАКАЗАТЬ")
+def orderCart(message):
+    BASKET = ['Яичница','Яичница','Яичница', 'Овсянка', "Мюсли с молоком"]
+
+    SORTED_BASKET = {}
+
+    answer = "Позиции в вашей корзине: \n"
+
+    for item in BASKET:
+        if item in SORTED_BASKET:
+            SORTED_BASKET[item] += 1
+        else:
+            SORTED_BASKET[item] = 1
+    print(SORTED_BASKET)
+    print(list(SORTED_BASKET.items()))
+
+    for (key,value) in list(SORTED_BASKET.items()):
+
+        answer += f" - {key} x {value} \n"
+
+    bot.send_message("-1002223170132", answer) 
 
 @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 def start(message):
