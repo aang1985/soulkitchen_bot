@@ -48,14 +48,14 @@ def answerSTR(message):
     button3 = types.KeyboardButton("Мюсли с молоком") 
     button4 = types.KeyboardButton("Фритата")
     button5 = types.KeyboardButton("КОРЗИНА")
-    button6 = types.KeyboardButton("НАЗАД")
+
     global BASKET
     BASKET.append(message.text)
-    
-    keyboard.add (button1,button2,button3,button4,button5,button6)
+
+    keyboard.add (button1,button2,button3,button4,button5)
     bot.send_message(message.chat.id ,"Ещё что-то?",reply_markup=keyboard)
 
-@bot.message_handler(func=lambda message: message.text=="Яичница" or message.text=="Овсянка" or message.text=="Мюсли с молоком" or message.text=="Фритата" )
+@bot.message_handler(func=lambda message: message.text=="Яичница" or message.text=="Овсянка" or message.text=="Мюсли с молоком" or message.text=="Фритата" or message.text==True )
 def answerBREAKFESTIN(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
     button1 = types.KeyboardButton("Яичница")
@@ -109,7 +109,7 @@ def answerLANCH(message):
     bot.send_message(message.chat.id,"Выбирайте!", reply_markup=keyboard) 
 
 
-@bot.message_handler(func=lambda message: message.text=="Паста Феттучини" or message.text=="Стейк Рибай" or message.text=="Лосось на гриле" or message.text=="Запеканка из шпината" )
+@bot.message_handler(func=lambda message: message.text=="Паста Феттучини" or message.text=="Стейк Рибай" or message.text=="Лосось на гриле" or message.text=="Запеканка из шпината" or message.text==True )
 def answerBREAKFESTIN(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
     button1 = types.KeyboardButton("Паста Феттучини")
