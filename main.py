@@ -40,15 +40,20 @@ def answerBREAKFEST(message):
     keyboard.add (button1,button2,button3,button4,button5)
     bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
 
-# @bot.message_handler(func=lambda message: True)
-# def answerSTR(message):
-    # keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    # button1 = types.KeyboardButton("Яичница")
-    # button2 = types.KeyboardButton("Овсянка") 
-    # button3 = types.KeyboardButton("Мюсли с молоком") 
-    # button4 = types.KeyboardButton("Фритата")
-    # button5 = types.KeyboardButton("КОРЗИНА")
- #  bot.send_message(message.chat.id ,"Я могу добавить только то, что есть в меню ",reply_markup=keyboard)
+@bot.message_handler(func=lambda message: True)
+def answerSTR(message):
+    keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    button1 = types.KeyboardButton("Яичница")
+    button2 = types.KeyboardButton("Овсянка") 
+    button3 = types.KeyboardButton("Мюсли с молоком") 
+    button4 = types.KeyboardButton("Фритата")
+    button5 = types.KeyboardButton("КОРЗИНА")
+    button6 = types.KeyboardButton("НАЗАД")
+    global BASKET
+    BASKET.append(message.text)
+    
+    keyboard.add (button1,button2,button3,button4,button5,button6)
+    bot.send_message(message.chat.id ,"Ещё что-то?",reply_markup=keyboard)
 
 @bot.message_handler(func=lambda message: message.text=="Яичница" or message.text=="Овсянка" or message.text=="Мюсли с молоком" or message.text=="Фритата" )
 def answerBREAKFESTIN(message):
