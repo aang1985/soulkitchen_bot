@@ -76,9 +76,24 @@ def answerBASKET(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
     button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
     button2 = types.KeyboardButton("НАЗАД")
+    SORTED_BASKET = {}
+
+    answer = "Позиции в вашей корзине: \n"
+
+    for item in BASKET:
+            if item in SORTED_BASKET:
+                SORTED_BASKET[item] += 1
+            else:
+                SORTED_BASKET[item] = 1
+        # print(SORTED_BASKET)
+        # print(list(SORTED_BASKET.items()))
+
+    for (key,value) in list(SORTED_BASKET.items()):
+
+         answer += f" - {key} x {value} \n"
 
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id, f"Ваш заказ \n {BASKET}",reply_markup=keyboard) 
+    bot.send_message(message.chat.id, answer,reply_markup=keyboard) 
 
 @bot.message_handler(func=lambda message: message.text=="ОТПРАВИТЬ ЗАКАЗ")
 def sendOrder(message):
