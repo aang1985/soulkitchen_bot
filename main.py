@@ -88,17 +88,17 @@ def sendOrder(message):
 
         for item in BASKET:
             if item in SORTED_BASKET:
-             SORTED_BASKET[item] += 1
-        else:
-             SORTED_BASKET[item] = 1
-    # print(SORTED_BASKET)
-    # print(list(SORTED_BASKET.items()))
+                SORTED_BASKET[item] += 1
+            else:
+                SORTED_BASKET[item] = 1
+        print(SORTED_BASKET)
+        print(list(SORTED_BASKET.items()))
 
         for (key,value) in list(SORTED_BASKET.items()):
 
          answer += f" - {key} x {value} \n"
 
-         bot.send_message("-1002223170132", answer)
+        bot.send_message("-1002223170132", answer)
 
 @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 def answerBACK(message):
