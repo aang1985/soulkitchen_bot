@@ -86,7 +86,7 @@ def sendOrder(message):
     button1 = types.KeyboardButton("/start")
     
     keyboard.add (button1)
-    bot.send_message("-1002223170132", BASKET)
+    bot.send_message("-1002223170132", f"{BASKET}")
 
 @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 def answerBACK(message):
