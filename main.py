@@ -82,11 +82,23 @@ def answerBASKET(message):
 
 @bot.message_handler(func=lambda message: message.text=="ОТПРАВИТЬ ЗАКАЗ")
 def sendOrder(message):
-    keyboard = types.ReplyKeyboardMarkup(row_width=1)
-    button1 = types.KeyboardButton("/start")
-    
-    keyboard.add (button1)
-    bot.send_message("-1002223170132", f"{BASKET}")
+        SORTED_BASKET = {}
+
+        answer = "Позиции в вашей корзине: \n"
+
+        for item in BASKET:
+            if item in SORTED_BASKET:
+             SORTED_BASKET[item] += 1
+        else:
+            SORTED_BASKET[item] = 1
+    # print(SORTED_BASKET)
+    # print(list(SORTED_BASKET.items()))
+
+        for (key,value) in list(SORTED_BASKET.items()):
+
+         answer += f" - {key} x {value} \n"
+
+         bot.send_message("-1002223170132", answer)
 
 @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 def answerBACK(message):
