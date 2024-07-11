@@ -36,8 +36,9 @@ def answerBREAKFEST(message):
     button3 = types.KeyboardButton("Мюсли с молоком") 
     button4 = types.KeyboardButton("Фритата")
     button5 = types.KeyboardButton("КОРЗИНА")
+    button6 = types.KeyboardButton("НАЗАД")
 
-    keyboard.add (button1,button2,button3,button4,button5)
+    keyboard.add (button1,button2,button3,button4,button5,button6)
     bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
 
 # @bot.message_handler(func=lambda message: message.text==True)
@@ -71,20 +72,24 @@ def answerBREAKFESTIN(message):
     bot.send_message(message.chat.id,"Ещё что-то?", reply_markup=keyboard)   
 
 @bot.message_handler(func=lambda message: message.text=="КОРЗИНА")
-def answerBASKETBREAKFEST(message):
+def answerBASKET(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    button1 = types.KeyboardButton("Яичница")
-    button2 = types.KeyboardButton("Овсянка") 
-    button3 = types.KeyboardButton("Мюсли с молоком") 
-    button4 = types.KeyboardButton("Фритата")
-    button5 = types.KeyboardButton("КОРЗИНА")
-    button6 = types.KeyboardButton("НАЗАД")
+    button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
+    button2 = types.KeyboardButton("НАЗАД")
 
-    keyboard.add (button1,button2,button3,button4,button5,button6)
-    bot.send_message(message.chat.id, f"{BASKET}",reply_markup=keyboard) 
+    keyboard.add (button1,button2)
+    bot.send_message(message.chat.id, f"Ваш заказ \n {BASKET}",reply_markup=keyboard) 
+
+@bot.message_handler(func=lambda message: message.text=="ОТПРАВИТЬ ЗАКАЗ")
+def sendOrder(message):
+    keyboard = types.ReplyKeyboardMarkup(row_width=1)
+    button1 = types.KeyboardButton("/start")
+    
+    keyboard.add (button1)
+    bot.send_message("-1002223170132", BASKET)
 
 @bot.message_handler(func=lambda message: message.text=="НАЗАД")
-def start(message):
+def answerBACK(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
     button1 = types.KeyboardButton("Хочу Завтрак")
     button2 = types.KeyboardButton("Хочу Обед") 
