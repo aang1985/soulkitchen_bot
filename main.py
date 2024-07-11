@@ -90,7 +90,7 @@ def sendOrder(message):
             if item in SORTED_BASKET:
              SORTED_BASKET[item] += 1
         else:
-            SORTED_BASKET[item] = 1
+             SORTED_BASKET[item] = 1
     # print(SORTED_BASKET)
     # print(list(SORTED_BASKET.items()))
 
