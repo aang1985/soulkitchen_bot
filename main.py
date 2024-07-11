@@ -91,8 +91,8 @@ def sendOrder(message):
                 SORTED_BASKET[item] += 1
             else:
                 SORTED_BASKET[item] = 1
-        print(SORTED_BASKET)
-        print(list(SORTED_BASKET.items()))
+        # print(SORTED_BASKET)
+        # print(list(SORTED_BASKET.items()))
 
         for (key,value) in list(SORTED_BASKET.items()):
 
