@@ -9,14 +9,9 @@ bot = telebot.TeleBot(bot_key[:-1])
 @bot.message_handler(commands=["start"])
 def start(message):
     bot.send_message(message.chat.id , "Введите пароль")
-
-    if bot.message_handler(func=lambda message: message.text.lowwer()=="конь"):
-     keyboard = types.ReplyKeyboardMarkup(row_width=2)
-     button1 = types.KeyboardButton("Хочу Завтрак")    
-     button2 = types.KeyboardButton("Хочу Обед") 
-
-     keyboard.add (button1,button2)
-     bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ",reply_markup=keyboard)
+def password(message):
+    if bot.message_handler(func=lambda message: message.text.lower() == "конь"):
+     bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")
     else:
      start()
 
