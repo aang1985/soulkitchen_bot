@@ -11,34 +11,37 @@ def start(message):
     bot.send_message(message.chat.id , "Введите пароль")
     bot.register_next_step_handler_by_chat_id(message.chat.id, sendPass)
 
-@bot.message_handler(func=lambda message:message.text==True)
 def sendPass(message):
  if message.text.lower() == "конь":
-    # foto = open('DSCF2623.jpg','rb')
     bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")
         
  else:
     start(message)
 
-
-
-# def password(message):
-#     if bot.message_handler(func=lambda message: message.text.lower() == "конь"):
-#      bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")
-#     else:
-#      start()
-
-
 @bot.message_handler(commands=['deserts'])
 def giveMenu(message):
     f = open('deserts.pdf','rb')
     bot.send_document(message.chat.id, f)
+    keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    button1 = types.KeyboardButton("Хочу Завтрак")
+    button2 = types.KeyboardButton("Хочу Обед")
+    
+    keyboard.add (button1,button2)
+    bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
+
 
 
 @bot.message_handler(commands=['food'])
 def giveMenu(message):
     f = open('food.pdf','rb')
     bot.send_document(message.chat.id, f)
+
+    keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    button1 = types.KeyboardButton("Хочу Завтрак")
+    button2 = types.KeyboardButton("Хочу Обед")
+    
+    keyboard.add (button1,button2)
+    bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
 
 @bot.message_handler(func=lambda message: message.text=="Хочу Завтрак")
 def answerBREAKFEST(message):
