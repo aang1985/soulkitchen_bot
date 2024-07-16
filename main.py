@@ -18,7 +18,7 @@ def sendPass(message):
     bot.send_document(message.chat.id, foto)
         
  else:
-    start()
+    start(message)
 
 # def password(message):
 #     if bot.message_handler(func=lambda message: message.text.lower() == "конь"):
