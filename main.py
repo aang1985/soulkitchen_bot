@@ -20,6 +20,8 @@ def sendPass(message):
  else:
     start(message)
 
+
+
 # def password(message):
 #     if bot.message_handler(func=lambda message: message.text.lower() == "конь"):
 #      bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")
