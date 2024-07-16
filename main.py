@@ -14,8 +14,8 @@ def start(message):
 @bot.message_handler(func=lambda message:message.text==True)
 def sendPass(message):
  if message.text.lower() == "конь":
-    foto = open('DSCF2623.jpg','rb')
-    bot.send_document(message.chat.id, foto)
+    # foto = open('DSCF2623.jpg','rb')
+    bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")
         
  else:
     start(message)
