@@ -129,6 +129,7 @@ def sendOrder(message):
          answer += f" - {key} x {value} \n"
 
         bot.send_message("-1002223170132", answer)
+        bot.send_message(message.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
 
 @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 def answerBACK(message):
