@@ -41,7 +41,7 @@ def giveMenu(message):
     f = open('food.pdf','rb')
     bot.send_document(message.chat.id, f)
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    button1 = types.KeyboardButton("Сделать заказ")
+    button1 = types.KeyboardButton("ССДЕЛАТЬ ЗАКАЗ")
     button2 = types.KeyboardButton("НАЗАД")
     
     keyboard.add (button1,button2)
@@ -83,7 +83,7 @@ def giveMenu(message):
 #     button5 = types.KeyboardButton("КОРЗИНА")
 #     button6 = types.KeyboardButton("НАЗАД")
 
-@bot.message_handler(func=lambda message: message.text=="Сделать заказ")
+@bot.message_handler(func=lambda message: message.text=="СДЕЛАТЬ ЗАКАЗ")
 def makeOrder(message):
     bot.send_message(message.chat.id , "ВВЕДИТЕ ДАТУ НА КОТОРУЮ ВЫ ХОТИТЕ СДЕЛАТЬ ЗАКАЗ:")
     bot.register_next_step_handler_by_chat_id(message.chat.id, addDate)
