@@ -25,12 +25,12 @@ def afterPass(message) :
 def giveMenu(message):
     f = open('deserts.pdf','rb')
     bot.send_document(message.chat.id, f)
-    keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    keyboard = types.InlineKeyboardMarkup(row_width=1)
     button1 = types.KeyboardButton("СДЕЛАТЬ ЗАКАЗ")
     button2 = types.KeyboardButton("НАЗАД")
     
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
+    bot.send_message(message.chat.id ,"Что быдем делать дальше?")
 
 
 
@@ -45,7 +45,7 @@ def giveMenu(message):
     button2 = types.KeyboardButton("НАЗАД")
     
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Что быдем делать дальше?",reply_markup=keyboard)
+    bot.send_message(message.chat.id ,"Что быдем делать дальше?")
 
     # keyboard = types.ReplyKeyboardMarkup(row_width=2)
     # button1 = types.KeyboardButton("Хочу Завтрак")
@@ -122,7 +122,7 @@ def addORDER(message):
 
 @bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ")
 def answerBASKET(message):
-    keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    keyboard = types.InlineKeyboardMarkup(row_width=1)
     button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
     button2 = types.KeyboardButton("НАЗАД")
     # SORTED_BASKET = {}
@@ -142,7 +142,7 @@ def answerBASKET(message):
     #      answer += f" - {key} x {value} \n"
 
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id,BASKET,reply_markup=keyboard) 
+    bot.send_message(message.chat.id,BASKET,InlineKeyboardMarkup) 
 
 @bot.message_handler(func=lambda message: message.text=="ОТПРАВИТЬ ЗАКАЗ")
 def sendOrder(message):
