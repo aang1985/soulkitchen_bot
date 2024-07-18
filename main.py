@@ -18,16 +18,21 @@ def sendPass(message):
  else:
     start(message)
 
+def afterPass(message) :
+  bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")   
+
 @bot.message_handler(commands=['deserts'])
 def giveMenu(message):
     f = open('deserts.pdf','rb')
     bot.send_document(message.chat.id, f)
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    button1 = types.KeyboardButton("Хочу Завтрак")
-    button2 = types.KeyboardButton("Хочу Обед")
+    button1 = types.KeyboardButton("СДЕЛАТЬ ЗАКАЗ")
+    button2 = types.KeyboardButton("НАЗАД")
     
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
+    bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
+
+
 
 
 
@@ -35,35 +40,32 @@ def giveMenu(message):
 def giveMenu(message):
     f = open('food.pdf','rb')
     bot.send_document(message.chat.id, f)
-
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    button1 = types.KeyboardButton("Хочу Завтрак")
-    button2 = types.KeyboardButton("Хочу Обед")
+    button1 = types.KeyboardButton("Сделать заказ")
+    button2 = types.KeyboardButton("НАЗАД")
     
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
+    bot.send_message(message.chat.id ,"Что быдем делать дальше?",reply_markup=keyboard)
 
-@bot.message_handler(func=lambda message: message.text=="Хочу Завтрак")
-def answerBREAKFEST(message):
-    keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    button1 = types.KeyboardButton("Яичница")
-    button2 = types.KeyboardButton("Овсянка") 
-    button3 = types.KeyboardButton("Мюсли с молоком") 
-    button4 = types.KeyboardButton("Фритата")
-    button5 = types.KeyboardButton("КОРЗИНА")
-    button6 = types.KeyboardButton("НАЗАД")
+    # keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    # button1 = types.KeyboardButton("Хочу Завтрак")
+    # button2 = types.KeyboardButton("Хочу Обед")
+    
+    # keyboard.add (button1,button2)
+    # bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
 
-    keyboard.add (button1,button2,button3,button4,button5,button6)
-    bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
-
-# @bot.message_handler(func=lambda message: message.text==True)
-# def answerSTR(message):
+# @bot.message_handler(func=lambda message: message.text=="Хочу Завтрак")
+# def answerBREAKFEST(message):
 #     keyboard = types.ReplyKeyboardMarkup(row_width=2)
 #     button1 = types.KeyboardButton("Яичница")
 #     button2 = types.KeyboardButton("Овсянка") 
 #     button3 = types.KeyboardButton("Мюсли с молоком") 
 #     button4 = types.KeyboardButton("Фритата")
 #     button5 = types.KeyboardButton("КОРЗИНА")
+#     button6 = types.KeyboardButton("НАЗАД")
+
+#     keyboard.add (button1,button2,button3,button4,button5,button6)
+#     bot.send_message(message.chat.id ,"Выберайте!",reply_markup=keyboard)
 
 #     global BASKET
 #     BASKET.append(message.text)
@@ -71,44 +73,76 @@ def answerBREAKFEST(message):
 #     keyboard.add (button1,button2,button3,button4,button5)
 #     bot.send_message(message.chat.id ,"Ещё что-то?",reply_markup=keyboard)
 
-@bot.message_handler(func=lambda message: message.text=="Яичница" or message.text=="Овсянка" or message.text=="Мюсли с молоком" or message.text=="Фритата")
-def answerBREAKFESTIN(message):
-    keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    button1 = types.KeyboardButton("Яичница")
-    button2 = types.KeyboardButton("Овсянка") 
-    button3 = types.KeyboardButton("Мюсли с молоком") 
-    button4 = types.KeyboardButton("Фритата")
-    button5 = types.KeyboardButton("КОРЗИНА")
-    button6 = types.KeyboardButton("НАЗАД")
+# @bot.message_handler(func=lambda message: message.text=="Яичница" or message.text=="Овсянка" or message.text=="Мюсли с молоком" or message.text=="Фритата")
+# def answerBREAKFESTIN(message):
+#     keyboard = types.ReplyKeyboardMarkup(row_width=2)
+#     button1 = types.KeyboardButton("Яичница")
+#     button2 = types.KeyboardButton("Овсянка") 
+#     button3 = types.KeyboardButton("Мюсли с молоком") 
+#     button4 = types.KeyboardButton("Фритата")
+#     button5 = types.KeyboardButton("КОРЗИНА")
+#     button6 = types.KeyboardButton("НАЗАД")
+
+@bot.message_handler(func=lambda message: message.text=="Сделать заказ")
+def makeOrder(message):
+    bot.send_message(message.chat.id , "ВВЕДИТЕ ДАТУ НА КОТОРУЮ ВЫ ХОТИТЕ СДЕЛАТЬ ЗАКАЗ:")
+    bot.register_next_step_handler_by_chat_id(message.chat.id, addDate)
+def addDate(message):
     global BASKET
     BASKET.append(message.text)
+    bot.send_message(message.chat.id , "ВВЕДИТЕ АДРЕС ВАШЕЙ ТОРГОВОЙ ТОЧКИ:")
+    bot.register_next_step_handler_by_chat_id(message.chat.id, addAdress)
+def addAdress(message):
+    global BASKET
+    BASKET.append(message.text)
+    bot.send_message(message.chat.id , "ВВЕДИТЕ НАЗВАНИЕ ВАШЕЙ ТОРГОВОЙ ТОЧКИ:")
+    bot.register_next_step_handler_by_chat_id(message.chat.id, addNameTT)
+def addNameTT(message):   
+    global BASKET
+    BASKET.append(message.text)
+    bot.send_message(message.chat.id , "ВВЕДИТЕ ТЕЛЕФОН ДЛЯ СВЯЗИ:")
+    bot.register_next_step_handler_by_chat_id(message.chat.id, addPhoneNumber)
+def addPhoneNumber(message):   
+    global BASKET
+    BASKET.append(message.text)
+    bot.send_message(message.chat.id , "УРА! Теперь вы можете написать ваш заказ, вот вам пример: \n Cэндвич с курицей - 5 \n Цезарь ролл с креветкой - 5 \n Наполеон веган - 5 \n Маффины с черникой 1 \n НЕ ЗАБЫВАЙТЕ, что некотрые позиции заказываются только кратно 4шт такие как мафины и кексы")
+    bot.register_next_step_handler_by_chat_id(message.chat.id, addORDER)
+def addORDER(message):   
+    global BASKET
+    BASKET.append(message.text)
+    bot.send_message(message.chat.id , "Я оформил ваш заказ! Теперь я могу его ПОСМОТРЕТЬ / ОТПРАВИТЬ / УДАЛИТЬ / ДОПОЛНИТЬ, выберите нужный вариант в меню ниже:")
+    keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
+    button2 = types.KeyboardButton("ДОПОЛНИТЬ ЗАКАЗ")
+    button3 = types.KeyboardButton("УДАЛИТЬ ЗАКАЗ")
+    button4 = types.KeyboardButton("ПОСМОТРЕТЬ ЗАКАЗ")
+    keyboard.add (button1,button2,button3,button4)
+    bot.send_message(message.chat.id,reply_markup=keyboard)
 
-    keyboard.add (button1,button2,button3,button4,button5,button6)
-    bot.send_message(message.chat.id,"Ещё что-то?", reply_markup=keyboard)   
 
-@bot.message_handler(func=lambda message: message.text=="КОРЗИНА")
+@bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ")
 def answerBASKET(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=2)
     button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
     button2 = types.KeyboardButton("НАЗАД")
-    SORTED_BASKET = {}
+    # SORTED_BASKET = {}
 
-    answer = "Позиции в вашей корзине: \n"
+    # answer = "Позиции в вашей корзине: \n"
 
-    for item in BASKET:
-            if item in SORTED_BASKET:
-                SORTED_BASKET[item] += 1
-            else:
-                SORTED_BASKET[item] = 1
-        # print(SORTED_BASKET)
-        # print(list(SORTED_BASKET.items()))
+    # for item in BASKET:
+    #         if item in SORTED_BASKET:
+    #             SORTED_BASKET[item] += 1
+    #         else:
+    #             SORTED_BASKET[item] = 1
+    #     # print(SORTED_BASKET)
+    #     # print(list(SORTED_BASKET.items()))
 
-    for (key,value) in list(SORTED_BASKET.items()):
+    # for (key,value) in list(SORTED_BASKET.items()):
 
-         answer += f" - {key} x {value} \n"
+    #      answer += f" - {key} x {value} \n"
 
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id, answer,reply_markup=keyboard) 
+    bot.send_message(message.chat.id,BASKET,reply_markup=keyboard) 
 
 @bot.message_handler(func=lambda message: message.text=="ОТПРАВИТЬ ЗАКАЗ")
 def sendOrder(message):
@@ -133,14 +167,15 @@ def sendOrder(message):
 
 @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 def answerBACK(message):
-    keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    button1 = types.KeyboardButton("Хочу Завтрак")
-    button2 = types.KeyboardButton("Хочу Обед") 
-    button3 = types.KeyboardButton("КОРЗИНА")
-    button4 = types.KeyboardButton("Очистить Корзину")
+    afterPass()
+    # keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    # button1 = types.KeyboardButton("Хочу Завтрак")
+    # button2 = types.KeyboardButton("Хочу Обед") 
+    # button3 = types.KeyboardButton("КОРЗИНА")
+    # button4 = types.KeyboardButton("Очистить Корзину")
 
-    keyboard.add (button1,button2,button3,button4)
-    bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! ",reply_markup=keyboard)
+    # keyboard.add (button1,button2,button3,button4)
+    # bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! ",reply_markup=keyboard)
 
 @bot.message_handler(func=lambda message: message.text=="Хочу Обед")
 def answerLANCH(message):
