@@ -26,11 +26,11 @@ def giveMenu(message):
     f = open('deserts.pdf','rb')
     bot.send_document(message.chat.id, f)
     keyboard = types.InlineKeyboardMarkup(row_width=1)
-    button1 = types.KeyboardButton("СДЕЛАТЬ ЗАКАЗ")
-    button2 = types.KeyboardButton("НАЗАД")
+    button1 = types.InlineKeyboardButton("СДЕЛАТЬ ЗАКАЗ")
+    button2 = types.InlineKeyboardButton("НАЗАД")
     
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Что быдем делать дальше?")
+    bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
 
 
 
@@ -45,7 +45,7 @@ def giveMenu(message):
     button2 = types.KeyboardButton("НАЗАД")
     
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Что быдем делать дальше?")
+    bot.send_message(message.chat.id ,"Что быдем делать дальше?",reply_markup=keyboard)
 
     # keyboard = types.ReplyKeyboardMarkup(row_width=2)
     # button1 = types.KeyboardButton("Хочу Завтрак")
