@@ -27,7 +27,7 @@ def giveMenu(message):
     bot.send_document(message.chat.id, f)
     keyboard = types.InlineKeyboardMarkup(row_width=1)
     button1 = types.InlineKeyboardButton("СДЕЛАТЬ ЗАКАЗ",callback_data='СДЕЛАТЬ ЗАКАЗ')
-    button2 = types.InlineKeyboardButton("НАЗАД",callback_data='НАЗАД')
+    button2 = types.InlineKeyboardButton("ПРИСЛАТЬ МЕНЮ ЕДЫ",callback_data='ПРИСЛАТЬ МЕНЮ ЕДЫ')
     keyboard.add (button1,button2)
     bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
 
@@ -35,11 +35,12 @@ def giveMenu(message):
 def callback(call):
  if call.message:
    if call.data=='СДЕЛАТЬ ЗАКАЗ':
-      bot.send_message(call.message.chat.id ,"СДЕЛАТЬ ЗАКАЗ")
+      bot.send_message(call.message.chat.id ,"ВВЕДИТЕ ДАТУ НА КОТОРУЮ ВЫ ХОТИТЕ СДЕЛАТЬ ЗАКАЗ")
+      bot.register_next_step_handler_by_chat_id(call.message.chat.id,addDate)
 
-   elif call.data=='НАЗАД':
-      bot.send_message(call.message.chat.id ,"НАЗАД")
-
+   elif call.data=='ПРИСЛАТЬ МЕНЮ ЕДЫ':
+     f = open('food.pdf','rb')
+     bot.send_document(call.message.chat.id, f)
 
 @bot.message_handler(commands=['food'])
 def giveMenu(message):
@@ -47,7 +48,7 @@ def giveMenu(message):
     bot.send_document(message.chat.id, f)
     keyboard = types.InlineKeyboardMarkup(row_width=1)
     button1 = types.InlineKeyboardButton("СДЕЛАТЬ ЗАКАЗ",callback_data='СДЕЛАТЬ ЗАКАЗ')
-    button2 = types.InlineKeyboardButton("НАЗАД",callback_data='НАЗАД')
+    button2 = types.InlineKeyboardButton("ПРИСЛАТЬ МЕНЮ ДЕСЕРТОВ",callback_data='ПРИСЛАТЬ МЕНЮ ДЕСЕРТОВ')
     keyboard.add (button1,button2)
     bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
 
@@ -55,10 +56,12 @@ def giveMenu(message):
 def callback(call):
  if call.message:
    if call.data=='СДЕЛАТЬ ЗАКАЗ':
-       bot.send_message(call.message.chat.id ,"СДЕЛАТЬ ЗАКАЗ")
+      bot.send_message(call.message.chat.id ,"ВВЕДИТЕ ДАТУ НА КОТОРУЮ ВЫ ХОТИТЕ СДЕЛАТЬ ЗАКАЗ")
+      bot.register_next_step_handler_by_chat_id(call.message.chat.id,addDate)
 
-   elif call.data=='НАЗАД':
-       bot.send_message(call.message.chat.id ,"НАЗАД")
+   elif call.data=='ПРИСЛАТЬ МЕНЮ ДЕСЕРТОВ':
+       f = open('deserts.pdf','rb')
+       bot.send_message(call.message.chat.id ,f)
     # keyboard = types.ReplyKeyboardMarkup(row_width=2)
     # button1 = types.KeyboardButton("Хочу Завтрак")
     # button2 = types.KeyboardButton("Хочу Обед")
