@@ -35,10 +35,10 @@ def giveMenu(message):
 def callback(call):
  if call.message:
    if call.data=='СДЕЛАТЬ ЗАКАЗ':
-      makeOrder(call)
+      bot.send_message(call.message.chat.id ,"СДЕЛАТЬ ЗАКАЗ")
 
    elif call.data=='НАЗАД':
-      afterPass(call)
+      bot.send_message(call.message.chat.id ,"НАЗАД")
 
 
 @bot.message_handler(commands=['food'])
@@ -55,10 +55,10 @@ def giveMenu(message):
 def callback(call):
  if call.message:
    if call.data=='СДЕЛАТЬ ЗАКАЗ':
-       makeOrder(call)
+       bot.send_message(call.message.chat.id ,"СДЕЛАТЬ ЗАКАЗ")
 
    elif call.data=='НАЗАД':
-       afterPass(call)
+       bot.send_message(call.message.chat.id ,"НАЗАД")
     # keyboard = types.ReplyKeyboardMarkup(row_width=2)
     # button1 = types.KeyboardButton("Хочу Завтрак")
     # button2 = types.KeyboardButton("Хочу Обед")
