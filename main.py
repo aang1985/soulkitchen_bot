@@ -26,13 +26,21 @@ def giveMenu(message):
     f = open('deserts.pdf','rb')
     bot.send_document(message.chat.id, f)
     keyboard = types.InlineKeyboardMarkup(row_width=1)
-    button1 = types.InlineKeyboardButton("СДЕЛАТЬ ЗАКАЗ")
-    button2 = types.InlineKeyboardButton("НАЗАД")
-    
+    button1 = types.InlineKeyboardButton("СДЕЛАТЬ ЗАКАЗ",callback_data='СДЕЛАТЬ ЗАКАЗ')
+    button2 = types.InlineKeyboardButton("НАЗАД",callback_data='НАЗАД')
     keyboard.add (button1,button2)
     bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
 
+@bot.callback_query_handler(func=lambda call: True)
+def callback(call):
+ if call.message:
+   if call.data=='СДЕЛАТЬ ЗАКАЗ':
 
+       bot.send_message(call.message.chat.id, choice(makeOrder))
+
+   elif call.data=='НАЗАД':
+
+       bot.send_message(call.message.chat.id, choice(answerBACK))
 
 
 
@@ -40,12 +48,22 @@ def giveMenu(message):
 def giveMenu(message):
     f = open('food.pdf','rb')
     bot.send_document(message.chat.id, f)
-    keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    button1 = types.KeyboardButton("ССДЕЛАТЬ ЗАКАЗ")
-    button2 = types.KeyboardButton("НАЗАД")
-    
+    keyboard = types.InlineKeyboardMarkup(row_width=1)
+    button1 = types.InlineKeyboardButton("СДЕЛАТЬ ЗАКАЗ",callback_data='СДЕЛАТЬ ЗАКАЗ')
+    button2 = types.InlineKeyboardButton("НАЗАД",callback_data='НАЗАД')
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Что быдем делать дальше?",reply_markup=keyboard)
+    bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback(call):
+ if call.message:
+   if call.data=='СДЕЛАТЬ ЗАКАЗ':
+
+       bot.send_message(call.message.chat.id, choice(makeOrder))
+
+   elif call.data=='НАЗАД':
+
+       bot.send_message(call.message.chat.id, choice(answerBACK))
 
     # keyboard = types.ReplyKeyboardMarkup(row_width=2)
     # button1 = types.KeyboardButton("Хочу Завтрак")
