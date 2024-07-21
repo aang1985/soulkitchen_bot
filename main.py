@@ -58,11 +58,11 @@ def callback(call):
  if call.message:
    if call.data=='СДЕЛАТЬ ЗАКАЗ':
 
-       bot.send_message(call.message.chat.id,"Прекрасно!")
+       bot.register_next_step_handler_by_chat_id(call.chat.id,makeOrder)
 
    elif call.data=='НАЗАД':
 
-       bot.send_message(call.message.chat.id,answerBACK())
+       bot.register_next_step_handler_by_chat_id(call.chat.id,afterPass)
 
     # keyboard = types.ReplyKeyboardMarkup(row_width=2)
     # button1 = types.KeyboardButton("Хочу Завтрак")
