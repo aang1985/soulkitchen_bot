@@ -121,7 +121,7 @@ def addNameTT(message):
 def addPhoneNumber(message):   
     global BASKET
     BASKET.append(message.text)
-    bot.send_message(message.chat.id , "УРА! Теперь вы можете написать ваш заказ, вот вам пример: \n Cэндвич с курицей - 5 \n Цезарь ролл с креветкой - 5 \n Наполеон веган - 5 \n Маффины с черникой 1 \n НЕ ЗАБЫВАЙТЕ, что некотрые позиции заказываются только кратно 4шт такие как мафины и кексы")
+    bot.send_message(message.chat.id , "УРА! Теперь вы можете написать ваш заказ \n вот вам пример: \n Cэндвич с курицей - 5 \n Цезарь ролл с креветкой - 5 \n Наполеон веган - 5 \n Маффины с черникой 1 \n НЕ ЗАБЫВАЙТЕ, что некотрые позиции заказываются только кратно 4шт такие как мафины и кексы")
     bot.register_next_step_handler_by_chat_id(message.chat.id, addORDER)
 def addORDER(message):   
     global BASKET
