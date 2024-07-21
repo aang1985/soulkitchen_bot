@@ -36,12 +36,11 @@ def callback(call):
  if call.message:
    if call.data=='СДЕЛАТЬ ЗАКАЗ':
 
-       bot.send_message(call.message.chat.id, choice(makeOrder))
+       bot.register_next_step_handler_by_chat_id(call.chat.id,makeOrder)
 
    elif call.data=='НАЗАД':
 
-       bot.send_message(call.message.chat.id, choice(answerBACK))
-
+       bot.register_next_step_handler_by_chat_id(call.chat.id,afterPass)
 
 
 @bot.message_handler(commands=['food'])
@@ -59,7 +58,7 @@ def callback(call):
  if call.message:
    if call.data=='СДЕЛАТЬ ЗАКАЗ':
 
-       bot.send_message(call.message.chat.id,makeOrder())
+       bot.send_message(call.message.chat.id,"Прекрасно!")
 
    elif call.data=='НАЗАД':
 
