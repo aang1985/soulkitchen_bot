@@ -16,6 +16,7 @@ def sendPass(message):
     bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")
         
  else:
+    bot.send_message(message.chat.id , "еще разок и у тебя получится...")
     start(message)
 
 def afterPass(message) :
@@ -24,12 +25,13 @@ def afterPass(message) :
 @bot.message_handler(commands=['deserts'])
 def giveMenu(message):
     f = open('deserts.pdf','rb')
-    bot.send_document(message.chat.id, f)
+    # bot.send_document(message.chat.id, f,reply_markup=keyboard)
     keyboard = types.InlineKeyboardMarkup(row_width=1)
     button1 = types.InlineKeyboardButton("СДЕЛАТЬ ЗАКАЗ",callback_data='СДЕЛАТЬ ЗАКАЗ')
     button2 = types.InlineKeyboardButton("ПРИСЛАТЬ МЕНЮ ЕДЫ",callback_data='ПРИСЛАТЬ МЕНЮ ЕДЫ')
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
+    bot.send_document(message.chat.id, f,reply_markup=keyboard)
+    # bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
@@ -125,14 +127,13 @@ def addPhoneNumber(message):
 def addORDER(message):   
     global BASKET
     BASKET.append(message.text)
-    bot.send_message(message.chat.id , "Я оформил ваш заказ! Теперь я могу его ПОСМОТРЕТЬ / ОТПРАВИТЬ / УДАЛИТЬ / ДОПОЛНИТЬ, выберите нужный вариант в меню ниже:")
-    keyboard = types.ReplyKeyboardMarkup(row_width=2)
+    bot.send_message(message.chat.id , "Я оформил ваш заказ!",reply_markup=keyboard)
     button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
     button2 = types.KeyboardButton("ДОПОЛНИТЬ ЗАКАЗ")
     button3 = types.KeyboardButton("УДАЛИТЬ ЗАКАЗ")
     button4 = types.KeyboardButton("ПОСМОТРЕТЬ ЗАКАЗ")
     keyboard.add (button1,button2,button3,button4)
-    bot.send_message(message.chat.id,"Теперь я могу его ПОСМОТРЕТЬ / ОТПРАВИТЬ / УДАЛИТЬ / ДОПОЛНИТЬ \n выберите нужный вариант в меню ниже:", reply_markup=keyboard)
+    bot.send_message(message.chat.id,"Теперь я могу его ПОСМОТРЕТЬ / ОТПРАВИТЬ / УДАЛИТЬ / ДОПОЛНИТЬ \n выберите нужный вариант в меню ниже:",reply_markup=keyboard)
 
 
 @bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ")
@@ -167,9 +168,9 @@ def sendOrder(message):
 
         for item in BASKET:
             if item in SORTED_BASKET:
-                SORTED_BASKET[item] += 1
+                SORTED_BASKET[item] 
             else:
-                SORTED_BASKET[item] = 1
+                continue
         # print(SORTED_BASKET)
         # print(list(SORTED_BASKET.items()))
 
