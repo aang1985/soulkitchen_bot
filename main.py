@@ -139,7 +139,7 @@ def addORDER(message):
 
 @bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ")
 def answerBASKET(message):
-    keyboard = types.InlineKeyboardMarkup(row_width=1)
+    keyboard = types.ReplyKeyboardMarkup(row_width=1)
     button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
     button2 = types.KeyboardButton("НАЗАД")
     SORTED_BASKET = {}
