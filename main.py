@@ -184,7 +184,7 @@ def sendOrder(message):
 
 @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 def answerBACK(message):
- def afterPass(message):
+ bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")   
     
     # keyboard = types.ReplyKeyboardMarkup(row_width=2)
     # button1 = types.KeyboardButton("Хочу Завтрак")
@@ -234,7 +234,4 @@ def answerBACK(message):
 #     BASKET.clear()
 
 #     keyboard.add (button1,button2)
-
-#     bot.send_message(message.chat.id ,"Ваша КОРЗИНА пуста!",reply_markup=keyboard)
-
-    bot.polling()
+bot.polling()
