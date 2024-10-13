@@ -140,7 +140,7 @@ def addORDER(message):
 def callback(call):
  if call.message:
    if call.data=='ПОСМОТРЕТЬ ЗАКАЗ':
-    def answerBASKET(message):
+  
         
         SORTED_BASKET = {}
 
@@ -163,7 +163,7 @@ def callback(call):
 
 
    elif call.data=='ОТПРАВИТЬ ЗАКАЗ':
-    def sendOrder(message):
+  
         SORTED_BASKET = {}
 
         answer = "Позиции в вашей корзине: \n"
