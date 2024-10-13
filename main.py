@@ -52,7 +52,7 @@ def giveMenu(message):
     button1 = types.InlineKeyboardButton("СДЕЛАТЬ ЗАКАЗ",callback_data='СДЕЛАТЬ ЗАКАЗ')
     button2 = types.InlineKeyboardButton("ПРИСЛАТЬ МЕНЮ ДЕСЕРТОВ",callback_data='ПРИСЛАТЬ МЕНЮ ДЕСЕРТОВ')
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Что быдем делать дальше?", reply_markup=keyboard)
+    bot.send_message(message.chat.id ,"Что будем делать дальше?", reply_markup=keyboard)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
@@ -127,64 +127,68 @@ def addPhoneNumber(message):
 def addORDER(message):   
     global BASKET
     BASKET.append(message.text)
-    keyboard = types.ReplyKeyboardMarkup(row_width=2)
-    bot.send_message(message.chat.id , "Я оформил ваш заказ!",reply_markup=keyboard)
-    button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
-    button2 = types.KeyboardButton("ДОПОЛНИТЬ ЗАКАЗ")
-    button3 = types.KeyboardButton("УДАЛИТЬ ЗАКАЗ")
-    button4 = types.KeyboardButton("ПОСМОТРЕТЬ ЗАКАЗ")
-    keyboard.add (button1,button2,button3,button4)
-    bot.send_message(message.chat.id,"Теперь я могу его ПОСМОТРЕТЬ / ОТПРАВИТЬ / УДАЛИТЬ / ДОПОЛНИТЬ \n выберите нужный вариант в меню ниже:",reply_markup=keyboard)
-
-
-@bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ")
-def answerBASKET(message):
-    keyboard = types.ReplyKeyboardMarkup(row_width=1)
-    button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
-    button2 = types.KeyboardButton("НАЗАД")
-    SORTED_BASKET = {}
-
-    answer = "Позиции в вашей корзине: \n"
-
-    for item in BASKET:
-            if item in SORTED_BASKET:
-                SORTED_BASKET[item] += 1
-            else:
-                SORTED_BASKET[item] = 1
-        # print(SORTED_BASKET)
-        # print(list(SORTED_BASKET.items()))
-
-    for (key,value) in list(SORTED_BASKET.items()):
-
-         answer += f"  {key}  \n"
-
+    keyboard = types.InlineKeyboardMarkup(row_width=1)
+    button1 = types.InlineKeyboardButton("ОТПРАВИТЬ ЗАКАЗ",callback_data='ОТПРАВИТЬ ЗАКАЗ')
+    button2 = types.InlineKeyboardButton("ПОСМОТРЕТЬ ЗАКАЗ",callback_data='ПОСМОТРЕТЬ ЗАКАЗ')
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id,answer,reply_markup=keyboard) 
+    bot.send_message(message.chat.id ,"Я оформил ваш заказ!\n Что быдем делать дальше?", reply_markup=keyboard)
 
-@bot.message_handler(func=lambda message: message.text=="ОТПРАВИТЬ ЗАКАЗ")
-def sendOrder(message):
-    SORTED_BASKET = {}
+   
+    
+   
+@bot.callback_query_handler(func=lambda call: True)
+def callback(call):
+ if call.message:
+   if call.data=='ПОСМОТРЕТЬ ЗАКАЗ':
+    def answerBASKET(message):
+        
+        SORTED_BASKET = {}
 
-    answer = "Позиции в вашей корзине: \n"
+        answer = "Позиции в вашей корзине: \n"
 
-    for item in BASKET:
-            if item in SORTED_BASKET:
-                SORTED_BASKET[item] +=1
-            else:
-                SORTED_BASKET[item] = 1
-        # print(SORTED_BASKET)
-        # print(list(SORTED_BASKET.items()))
+        for item in BASKET:
+                if item in SORTED_BASKET:
+                    SORTED_BASKET[item] += 1
+                else:
+                    SORTED_BASKET[item] = 1
+            # print(SORTED_BASKET)
+            # print(list(SORTED_BASKET.items()))
 
-    for (key,value) in list(SORTED_BASKET.items()):
+        for (key,value) in list(SORTED_BASKET.items()):
 
-         answer += f" {key}  \n"
+            answer += f"  {key}  \n"
 
-    bot.send_message("-1002223170132", answer)
-    bot.send_message(message.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
+        
+        bot.send_message(message.chat.id,answer) 
 
-@bot.message_handler(func=lambda message: message.text=="НАЗАД")
-def answerBACK(message):
- bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")   
+@bot.callback_query_handler(func=lambda call: True)
+def callback(call):
+ if call.message:
+   if call.data=='ОТПРАВИТЬ ЗАКАЗ':
+
+    def sendOrder(message):
+        SORTED_BASKET = {}
+
+        answer = "Позиции в вашей корзине: \n"
+
+        for item in BASKET:
+                if item in SORTED_BASKET:
+                    SORTED_BASKET[item] +=1
+                else:
+                    SORTED_BASKET[item] = 1
+            # print(SORTED_BASKET)
+            # print(list(SORTED_BASKET.items()))
+
+        for (key,value) in list(SORTED_BASKET.items()):
+
+            answer += f" {key}  \n"
+
+        bot.send_message("-1002223170132", answer)
+        bot.send_message(message.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
+
+# @bot.message_handler(func=lambda message: message.text=="НАЗАД")
+# def answerBACK(message):
+#  bot.send_message(message.chat.id ,"Добро пожаловать в таверну ВУ! Здесь ты можешь заказать поесть! \n Введите /deserts - и я пришлю каталог десертов.\n Введите /food - и я пришлю каталог еды. ")   
     
     # keyboard = types.ReplyKeyboardMarkup(row_width=2)
     # button1 = types.KeyboardButton("Хочу Завтрак")
