@@ -161,11 +161,8 @@ def callback(call):
         
         bot.send_message(message.chat.id,answer) 
 
-@bot.callback_query_handler(func=lambda call: True)
-def callback(call):
- if call.message:
-   if call.data=='ОТПРАВИТЬ ЗАКАЗ':
 
+   elif call.data=='ОТПРАВИТЬ ЗАКАЗ':
     def sendOrder(message):
         SORTED_BASKET = {}
 
