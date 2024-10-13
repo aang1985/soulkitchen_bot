@@ -141,24 +141,24 @@ def answerBASKET(message):
     keyboard = types.InlineKeyboardMarkup(row_width=1)
     button1 = types.KeyboardButton("ОТПРАВИТЬ ЗАКАЗ")
     button2 = types.KeyboardButton("НАЗАД")
-    # SORTED_BASKET = {}
+    SORTED_BASKET = {}
 
-    # answer = "Позиции в вашей корзине: \n"
+    answer = "Позиции в вашей корзине: \n"
 
-    # for item in BASKET:
-    #         if item in SORTED_BASKET:
-    #             SORTED_BASKET[item] += 1
-    #         else:
-    #             SORTED_BASKET[item] = 1
-    #     # print(SORTED_BASKET)
-    #     # print(list(SORTED_BASKET.items()))
+    for item in BASKET:
+            if item in SORTED_BASKET:
+                SORTED_BASKET[item] += 1
+            else:
+                SORTED_BASKET[item] = 1
+        # print(SORTED_BASKET)
+        # print(list(SORTED_BASKET.items()))
 
-    # for (key,value) in list(SORTED_BASKET.items()):
+    for (key,value) in list(SORTED_BASKET.items()):
 
-    #      answer += f" - {key} x {value} \n"
+         answer += f" - {key}  \n"
 
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id,BASKET,reply_markup=keyboard) 
+    bot.send_message(message.chat.id,answer,reply_markup=keyboard) 
 
 @bot.message_handler(func=lambda message: message.text=="ОТПРАВИТЬ ЗАКАЗ")
 def sendOrder(message):
@@ -176,7 +176,7 @@ def sendOrder(message):
 
         for (key,value) in list(SORTED_BASKET.items()):
 
-         answer += f" - {key} x {value} \n"
+         answer += f" - {key}  \n"
 
         bot.send_message("-1002223170132", answer)
         bot.send_message(message.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
