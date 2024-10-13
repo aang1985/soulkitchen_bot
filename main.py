@@ -163,11 +163,11 @@ def answerBASKET(message):
 
 @bot.message_handler(func=lambda message: message.text=="ОТПРАВИТЬ ЗАКАЗ")
 def sendOrder(message):
-        SORTED_BASKET = {}
+    SORTED_BASKET = {}
 
-        answer = "Позиции в вашей корзине: \n"
+    answer = "Позиции в вашей корзине: \n"
 
-        for item in BASKET:
+    for item in BASKET:
             if item in SORTED_BASKET:
                 SORTED_BASKET[item] 
             else:
@@ -175,12 +175,12 @@ def sendOrder(message):
         # print(SORTED_BASKET)
         # print(list(SORTED_BASKET.items()))
 
-        for (key,value) in list(SORTED_BASKET.items()):
+    for (key,value) in list(SORTED_BASKET.items()):
 
          answer += f" - {key}  \n"
 
-        bot.send_message("-1002223170132", answer)
-        bot.send_message(message.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
+    bot.send_message("-1002223170132", answer)
+    bot.send_message(message.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
 
 @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 def answerBACK(message):
