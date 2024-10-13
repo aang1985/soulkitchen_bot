@@ -156,7 +156,7 @@ def answerBASKET(message):
 
     for (key,value) in list(SORTED_BASKET.items()):
 
-         answer += f" - {key}  \n"
+         answer += f"  {key}  \n"
 
     keyboard.add (button1,button2)
     bot.send_message(message.chat.id,answer,reply_markup=keyboard) 
@@ -169,15 +169,15 @@ def sendOrder(message):
 
     for item in BASKET:
             if item in SORTED_BASKET:
-                SORTED_BASKET[item] 
+                SORTED_BASKET[item] +=1
             else:
-                continue
+                SORTED_BASKET[item] = 1
         # print(SORTED_BASKET)
         # print(list(SORTED_BASKET.items()))
 
     for (key,value) in list(SORTED_BASKET.items()):
 
-         answer += f" - {key}  \n"
+         answer += f" {key}  \n"
 
     bot.send_message("-1002223170132", answer)
     bot.send_message(message.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
