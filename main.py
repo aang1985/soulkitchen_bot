@@ -162,7 +162,7 @@ def callback(call):
         bot.send_message(message.chat.id,answer) 
 
 
-   elif call.data=='ОТПРАВИТЬ ЗАКАЗ':
+ elif call.data=='ОТПРАВИТЬ ЗАКАЗ':
   
         SORTED_BASKET = {}
 
