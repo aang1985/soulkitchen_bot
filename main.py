@@ -159,10 +159,10 @@ def callback(call):
             answer += f"  {key}  \n"
 
         
-        bot.send_message(message.chat.id,answer) 
+            bot.send_message(message.chat.id,answer) 
 
 
- elif call.data=='ОТПРАВИТЬ ЗАКАЗ':
+   elif call.data=='ОТПРАВИТЬ ЗАКАЗ':
   
         SORTED_BASKET = {}
 
@@ -180,8 +180,8 @@ def callback(call):
 
             answer += f" {key}  \n"
 
-        bot.send_message("-1002223170132", answer)
-        bot.send_message(message.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
+            bot.send_message("-1002223170132", answer)
+            bot.send_message(message.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
 
 # @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 # def answerBACK(message):
