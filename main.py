@@ -139,40 +139,30 @@ def addORDER(message):
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
  if call.message:
-   if call.data=='ПОСМОТРЕТЬ ЗАКАЗ':
-  
-        
-        SORTED_BASKET = {}
+   if call.data=='ПОСМОТРЕТЬ ЗАКАЗ':  
+    SORTED_BASKET = {}
+    answer = "Позиции в вашей корзине: \n"
 
-        answer = "Позиции в вашей корзине: \n"
-
-        for item in BASKET:
-                if item in SORTED_BASKET:
-                    SORTED_BASKET[item] += 1
-                else:
-                    SORTED_BASKET[item] = 1
+    for item in BASKET:
+        if item in SORTED_BASKET:
+          SORTED_BASKET[item] += 1
+        else:
+          SORTED_BASKET[item] = 1
             # print(SORTED_BASKET)
             # print(list(SORTED_BASKET.items()))
 
-        for (key,value) in list(SORTED_BASKET.items()):
+    for (key,value) in list(SORTED_BASKET.items()):
 
-            answer += f"  {key}  \n"
-
-        
-            bot.send_message(message.chat.id,answer) 
-
-
-   elif call.data=='ОТПРАВИТЬ ЗАКАЗ':
-  
+        answer += f"  {key}  \n"      
+        bot.send_message(message.chat.id,answer) 
+   elif call.data=='ОТПРАВИТЬ ЗАКАЗ':  
         SORTED_BASKET = {}
-
         answer = "Позиции в вашей корзине: \n"
-
         for item in BASKET:
-                if item in SORTED_BASKET:
-                    SORTED_BASKET[item] +=1
-                else:
-                    SORTED_BASKET[item] = 1
+         if item in SORTED_BASKET:
+            SORTED_BASKET[item] +=1
+         else:
+            SORTED_BASKET[item] = 1
             # print(SORTED_BASKET)
             # print(list(SORTED_BASKET.items()))
 
