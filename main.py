@@ -128,7 +128,7 @@ def addORDER(message):
     global BASKET
     BASKET.append(message.text)
     keyboard = types.InlineKeyboardMarkup(row_width=1)
-    button1 = types.InlineKeyboardButton("ОТПРАВИТЬ ЗАКАЗ",callback_data='ОТПРАВИТЬ ЗАКАЗ')
+    button1 = types.InlineKeyboardButton(,callback_data='ОТПРАВИТЬ ЗАКАЗ')
     button2 = types.InlineKeyboardButton("ПОСМОТРЕТЬ ЗАКАЗ",callback_data='ПОСМОТРЕТЬ ЗАКАЗ')
     keyboard.add (button1,button2)
     bot.send_message(message.chat.id ,"Я оформил ваш заказ!\n Что быдем делать дальше?", reply_markup=keyboard)
@@ -136,8 +136,9 @@ def addORDER(message):
    
     
    
-@bot.callback_query_handler(func=lambda call: True)
+@bot.callback_query_handler (func=lambda messege: messege text == "ОТПРАВИТЬ ЗАКАЗ" or "ПОСМОТРЕТЬ ЗАКАЗ")
 def callback(call):
+
  if call.message:
    if call.data=='ПОСМОТРЕТЬ ЗАКАЗ':  
     SORTED_BASKET = {}
@@ -148,8 +149,7 @@ def callback(call):
           SORTED_BASKET[item] += 1
         else:
           SORTED_BASKET[item] = 1
-            # print(SORTED_BASKET)
-            # print(list(SORTED_BASKET.items()))
+              
 
     for (key,value) in list(SORTED_BASKET.items()):
 
@@ -162,10 +162,11 @@ def callback(call):
         for item in BASKET:
             if item in SORTED_BASKET:
                 SORTED_BASKET[item] +=1
+                print(SORTED_BASKET)
         else:
                 SORTED_BASKET[item] = 1
-            # print(SORTED_BASKET)
-            # print(list(SORTED_BASKET.items()))
+                print(SORTED_BASKET)
+                print(list(SORTED_BASKET.items()))
 
         for (key,value) in list(SORTED_BASKET.items()):
             answer += f" {key}  \n"
