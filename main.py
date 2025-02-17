@@ -128,7 +128,7 @@ def addORDER(message):
     global BASKET
     BASKET.append(message.text)
     keyboard = types.InlineKeyboardMarkup(row_width=1)
-    button1 = types.InlineKeyboardButton(,callback_data='ОТПРАВИТЬ ЗАКАЗ')
+    button1 = types.InlineKeyboardButton(callback_data='ОТПРАВИТЬ ЗАКАЗ')
     button2 = types.InlineKeyboardButton("ПОСМОТРЕТЬ ЗАКАЗ",callback_data='ПОСМОТРЕТЬ ЗАКАЗ')
     keyboard.add (button1,button2)
     bot.send_message(message.chat.id ,"Я оформил ваш заказ!\n Что быдем делать дальше?", reply_markup=keyboard)
@@ -136,11 +136,11 @@ def addORDER(message):
    
     
    
-@bot.callback_query_handler (func=lambda messege: messege text == "ОТПРАВИТЬ ЗАКАЗ" or "ПОСМОТРЕТЬ ЗАКАЗ")
+@bot.callback_query_handle (func=lambda messege: messege text == "ОТПРАВИТЬ ЗАКАЗ" or "ПОСМОТРЕТЬ ЗАКАЗ")
 def callback(call):
 
  if call.message:
-   if call.data=='ПОСМОТРЕТЬ ЗАКАЗ':  
+   if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
     SORTED_BASKET = {}
     answer = "Позиции в вашей корзине: \n"
 
