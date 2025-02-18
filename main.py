@@ -24,7 +24,7 @@ def afterPass(message) :
   keyboard = types.InlineKeyboardMarkup(row_width=1)
   button1 = types.InlineKeyboardButton("СДЕЛАТЬ ЗАКАЗ",callback_data='СДЕЛАТЬ ЗАКАЗ')
   keyboard.add (button1)
-  bot.send_document(message.chat.id, f,reply_markup=keyboard)
+  bot.send_document(message.chat.id,reply_markup=keyboard)
 
 @bot.message_handler(commands=['deserts'])
 def giveMenu(message):
