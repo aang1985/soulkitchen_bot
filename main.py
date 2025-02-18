@@ -139,7 +139,7 @@ def addORDER(message):
 @bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ" or "ОТПРАВИТЬ ЗАКАЗ" )
 def callbackto(call):
 
- if call.message:
+ #if call.message:
    if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
     SORTED_BASKET = {}
     answer = "Позиции в вашей корзине: \n"
