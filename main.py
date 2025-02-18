@@ -128,7 +128,7 @@ def addORDER(message):
     global BASKET
     BASKET.append(message.text)
     keyboard = types.InlineKeyboardMarkup(row_width=1)
-    button1 = types.InlineKeyboardButton(callback_data='ОТПРАВИТЬ ЗАКАЗ')
+    button1 = types.InlineKeyboardButton('ОТПРАВИТЬ ЗАКАЗ',callback_data='ОТПРАВИТЬ ЗАКАЗ')
     button2 = types.InlineKeyboardButton("ПОСМОТРЕТЬ ЗАКАЗ",callback_data='ПОСМОТРЕТЬ ЗАКАЗ')
     keyboard.add (button1,button2)
     bot.send_message(message.chat.id ,"Я оформил ваш заказ!\n Что быдем делать дальше?", reply_markup=keyboard)
