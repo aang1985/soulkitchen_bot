@@ -140,7 +140,7 @@ def addORDER(message):
 def callbackto(call):
 
  #if call.message:
-   if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
+ if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
     SORTED_BASKET = {}
     answer = "Позиции в вашей корзине: \n"
 
@@ -156,7 +156,7 @@ def callbackto(call):
         answer += f"  {key}  \n"      
         bot.send_message(call.chat.id,answer) 
 
-   elif call.data=='ОТПРАВИТЬ ЗАКАЗ':  
+ elif call.data=='ОТПРАВИТЬ ЗАКАЗ':  
         SORTED_BASKET = {}
         answer = "Позиции в вашей корзине: \n"
         for item in BASKET:
@@ -169,9 +169,9 @@ def callbackto(call):
                 print(list(SORTED_BASKET.items()))
 
         for (key,value) in list(SORTED_BASKET.items()):
-            answer += f" {key}  \n"
-        bot.send_message("-1002223170132", answer)
-        bot.send_message(call.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
+         answer += f" {key}  \n"
+         bot.send_message("-1002223170132", answer)
+         bot.send_message(call.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
 
 # @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 # def answerBACK(message):
