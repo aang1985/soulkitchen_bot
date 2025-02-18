@@ -136,8 +136,8 @@ def addORDER(message):
    
     
    
-@bot.callback_query_handle (func=lambda messege: messege text == "ОТПРАВИТЬ ЗАКАЗ" or "ПОСМОТРЕТЬ ЗАКАЗ")
-def callback(call):
+@bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ" or "ОТПРАВИТЬ ЗАКАЗ" )
+def callbackto(call):
 
  if call.message:
    if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
