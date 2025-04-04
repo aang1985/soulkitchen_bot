@@ -143,39 +143,51 @@ def addORDER(message):
 @bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ" or "ОТПРАВИТЬ ЗАКАЗ" )
 def callbackto(call):
 
- #if call.message:
- if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
-    SORTED_BASKET = {}
-    answer = "Позиции в вашей корзине: \n"
+ if call.message:
+  if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
+    SORTED_BASKET = {}  # Создаем пустую корзину в виде словаря
 
-    for item in BASKET:
-        if item in SORTED_BASKET:
-          SORTED_BASKET[item] += 1
+    while True:
+        item = input("Введите название товара и количество через пробел (или 'стоп' для выхода): ")
+        if item.lower() == 'стоп':
+            break  # Завершаем ввод, если пользователь ввел 'стоп'
+    
+        parts = item.rsplit(" ", 1)
+        if len(parts) == 2 and parts[1].isdigit():
+            item_name, quantity = parts[0], int(parts[1])
         else:
-          SORTED_BASKET[item] = 1
-              
-
-    for (key,value) in list(SORTED_BASKET.items()):
-
-        answer += f"  {key}  \n"      
-        bot.send_message(call.chat.id,answer) 
-
- elif call.data=='ОТПРАВИТЬ ЗАКАЗ':  
-        SORTED_BASKET = {}
-        answer = "Позиции в вашей корзине: \n"
-        for item in BASKET:
-            if item in SORTED_BASKET:
-                SORTED_BASKET[item] +=1
-                print(SORTED_BASKET)
+            item_name, quantity = item, 1  # Если количество не указано, берем 1
+    
+        if item_name in SORTED_BASKET:
+            [item_name] += quantity # Увеличиваем количество, если товар уже есть в корзине
         else:
-                SORTED_BASKET[item] = 1
-                print(SORTED_BASKET)
-                print(list(SORTED_BASKET.items()))
+          SORTED_BASKET[item] = quantity
+        print(f"Товар '{item_name}' добавлен в корзину! Количество: {SORTED_BASKET[item_name]}")    
+    print("\nВаши товары в корзине:")
+    for i, (product, quantity) in enumerate(cart.items(), 1):
+        print(f"{i}. {product} - {quantity} шт.")  
 
-        for (key,value) in list(SORTED_BASKET.items()):
-         answer += f" {key}  \n"
-         bot.send_message("-1002223170132", answer)
-         bot.send_message(call.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
+    # for (key,value) in list(SORTED_BASKET.items()):
+
+    #     answer += f"  {key}  \n"      
+    #     bot.send_message(call.chat.id,answer) 
+
+  elif call.data=='ОТПРАВИТЬ ЗАКАЗ':  
+    # SORTED_BASKET = {}
+    # answer = "Позиции в вашей корзине: \n"
+    # for item in BASKET:
+    #  if item in SORTED_BASKET:
+    #     SORTED_BASKET[item] +=1
+    #     print(SORTED_BASKET)
+    #  else:
+    #     SORTED_BASKET[item] = 1
+    #     print(SORTED_BASKET)
+    #     print(list(SORTED_BASKET.items()))
+
+    # for (key,value) in list(SORTED_BASKET.items()):
+    #     answer += f" {key}  \n"
+    #     bot.send_message("-1002223170132", answer)
+    #     bot.send_message(call.chat.id, "Ваш заказ принят! Спасибо что выбрали наш ресторан!")
 
 # @bot.message_handler(func=lambda message: message.text=="НАЗАД")
 # def answerBACK(message):
@@ -229,4 +241,4 @@ def callbackto(call):
 #     BASKET.clear()
 
 #     keyboard.add (button1,button2)
-bot.polling()
+    bot.polling()
