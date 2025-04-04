@@ -164,7 +164,7 @@ def callbackto(call):
           SORTED_BASKET[item] = quantity
         print(f"Товар '{item_name}' добавлен в корзину! Количество: {SORTED_BASKET[item_name]}")    
     print("\nВаши товары в корзине:")
-    for i, (product, quantity) in enumerate(cart.items(), 1):
+    for i, (product, quantity) in enumerate(SORTED_BASKET.items(), 1):
         print(f"{i}. {product} - {quantity} шт.")  
 
     # for (key,value) in list(SORTED_BASKET.items()):
@@ -172,7 +172,7 @@ def callbackto(call):
     #     answer += f"  {key}  \n"      
     #     bot.send_message(call.chat.id,answer) 
 
-  elif call.data=='ОТПРАВИТЬ ЗАКАЗ':  
+ elif call.data=='ОТПРАВИТЬ ЗАКАЗ':  
     # SORTED_BASKET = {}
     # answer = "Позиции в вашей корзине: \n"
     # for item in BASKET:
