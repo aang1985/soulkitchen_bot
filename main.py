@@ -159,9 +159,9 @@ def callbackto(call):
             item_name, quantity = item, 1  # Если количество не указано, берем 1
     
         if item_name in SORTED_BASKET:
-            [item_name] += quantity # Увеличиваем количество, если товар уже есть в корзине
+             SORTED_BASKET[item_name] += quantity # Увеличиваем количество, если товар уже есть в корзине
         else:
-          SORTED_BASKET[item] = quantity
+             SORTED_BASKET[item_name] = quantity
         print(f"Товар '{item_name}' добавлен в корзину! Количество: {SORTED_BASKET[item_name]}")    
     print("\nВаши товары в корзине:")
     for i, (product, quantity) in enumerate(SORTED_BASKET.items(), 1):
