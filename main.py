@@ -172,7 +172,7 @@ def callbackto(call):
     #     answer += f"  {key}  \n"      
     #     bot.send_message(call.chat.id,answer) 
 
- elif call.data=='ОТПРАВИТЬ ЗАКАЗ':  
+#  elif call.data=='ОТПРАВИТЬ ЗАКАЗ':  
     # SORTED_BASKET = {}
     # answer = "Позиции в вашей корзине: \n"
     # for item in BASKET:
@@ -241,4 +241,4 @@ def callbackto(call):
 #     BASKET.clear()
 
 #     keyboard.add (button1,button2)
-    bot.polling()
+bot.polling()
