@@ -162,7 +162,7 @@ def callbackto(call):
              SORTED_BASKET[item_name] += quantity # Увеличиваем количество, если товар уже есть в корзине
         else:
              SORTED_BASKET[item_name] = quantity
-        print(f"Товар '{item_name}' добавлен в корзину! Количество: {SORTED_BASKET[item_name]}")    
+        bot.send_message(reply_to_message_id=f"Товар '{item_name}' добавлен в корзину! Количество: {SORTED_BASKET[item_name]}")    
     print("\nВаши товары в корзине:")
     for i, (product, quantity) in enumerate(SORTED_BASKET.items(), 1):
         print(f"{i}. {product} - {quantity} шт.")  
