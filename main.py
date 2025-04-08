@@ -135,7 +135,7 @@ def addORDER(message):
     button1 = types.InlineKeyboardButton('ОТПРАВИТЬ ЗАКАЗ',callback_data='ОТПРАВИТЬ ЗАКАЗ')
     button2 = types.InlineKeyboardButton("ПОСМОТРЕТЬ ЗАКАЗ",callback_data='ПОСМОТРЕТЬ ЗАКАЗ')
     keyboard.add (button1,button2)
-    bot.send_message(message.chat.id ,"Я оформил ваш заказ!\n Что быдем делать дальше?", reply_markup=keyboard)
+    bot.send_message(message.chat.id ,"Я оформил ваш заказ!\n Что будем делать дальше?", reply_markup=keyboard)
 
    
     
@@ -145,8 +145,8 @@ def callbackto(call):
 
  if call.message:
   if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
-    SORTED_BASKET = {}  # Создаем пустую корзину в виде словаря
-
+    # SORTED_BASKET = {}  # Создаем пустую корзину в виде словаря
+    bot.send_message(call.message.chat.id , BASKET)
     while True:
         item = input("Введите название товара и количество через пробел (или 'стоп' для выхода): ")
         if item.lower() == 'стоп':
@@ -160,12 +160,13 @@ def callbackto(call):
     
         if item_name in SORTED_BASKET:
              SORTED_BASKET[item_name] += quantity # Увеличиваем количество, если товар уже есть в корзине
+             bot.send_message(call.message.chat_id,f"Товар '{item_name}' добавлен в корзину! Количество: {SORTED_BASKET[item_name]}") 
         else:
              SORTED_BASKET[item_name] = quantity
-        bot.send_message(reply_to_message_id=f"Товар '{item_name}' добавлен в корзину! Количество: {SORTED_BASKET[item_name]}")    
-    print("\nВаши товары в корзине:")
+             bot.send_message(call.message.chat_id,f"Товар '{item_name}' добавлен в корзину! Количество: {SORTED_BASKET[item_name]}")    
+    bot.send_message(call.message.chat_id("\nВаши товары в корзине:"))
     for i, (product, quantity) in enumerate(SORTED_BASKET.items(), 1):
-        print(f"{i}. {product} - {quantity} шт.")  
+        bot.send_message(call.message.chat_id (f"{i}. {product} - {quantity} шт."))  
 
     # for (key,value) in list(SORTED_BASKET.items()):
 
