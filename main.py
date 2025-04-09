@@ -147,7 +147,7 @@ def callbackto(call):
   if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
     # SORTED_BASKET = {}  # Создаем пустую корзину в виде словаря
     p=print(BASKET)
-    bot.send_message(call.message.chat.id , p)
+    bot.send_document(call.message.chat.id , p)
     # while True:
     #     item = input("Введите название товара и количество через пробел (или 'стоп' для выхода): ")
     #     if item.lower() == 'стоп':
