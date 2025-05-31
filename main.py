@@ -139,15 +139,21 @@ def addORDER(message):
 
    
     
-   
-@bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ" or "ОТПРАВИТЬ ЗАКАЗ" )
+@bot.callback_query_handler(func=lambda call: call.data in ["ПОСМОТРЕТЬ ЗАКАЗ", "ОТПРАВИТЬ ЗАКАЗ"])
 def callbackto(call):
+    if call.data == 'ПОСМОТРЕТЬ ЗАКАЗ':
+        bot.send_message(call.message.chat.id, str(BASKET))
+    elif call.data == 'ОТПРАВИТЬ ЗАКАЗ':
+        bot.send_message(call.message.chat.id, "Заказ отправлен!")
+   
+# @bot.message_handler(func=lambda message: message.text=="ПОСМОТРЕТЬ ЗАКАЗ" or "ОТПРАВИТЬ ЗАКАЗ" )
+# def callbackto(call):
 
- if call.message:
-  if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
-    # SORTED_BASKET = {}  # Создаем пустую корзину в виде словаря
-    #answer = print(list(BASKET))
-    bot.send_document(call.message.chat.id, str(BASKET))
+#  if call.message:
+#   if call.data =='ПОСМОТРЕТЬ ЗАКАЗ':  
+#     # SORTED_BASKET = {}  # Создаем пустую корзину в виде словаря
+#     #answer = print(list(BASKET))
+#     bot.send_document(call.message.chat.id, str(BASKET))
     # while True:
     #     item = input("Введите название товара и количество через пробел (или 'стоп' для выхода): ")
     #     if item.lower() == 'стоп':
